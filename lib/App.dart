@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment/Text.dart';
+import 'package:flutter_assignment/TextControl.dart';
 
-class MyAssignment extends StatelessWidget {
-  String myText = "Assignment";
+class MyAssignmentStateController extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState(){
+    return _MyAssignment();
+  }
+}
+
+class _MyAssignment extends State<MyAssignmentStateController> {
+  String _myText = "Assignment";
 
   void changeText() {
-
+    setState(() {
+      _myText = "It was changed after press on a button";
+    });
   }
-
-  MyAssignment();
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +24,13 @@ class MyAssignment extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: MyText(
-            title: myText,
+            title: _myText,
           ),
         ),
-        body: MyText(title: myText,),
+        body: Column(children: [
+          MyText(title: _myText),
+          TextControl(changeText: changeText)
+        ],),
       ),
     );
   }
